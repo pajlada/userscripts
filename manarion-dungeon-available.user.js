@@ -5,7 +5,7 @@
 // @license      MIT
 // @namespace    https://github.com/pajlada
 // @homepageURL  https://github.com/pajlada/userscripts
-// @version      2
+// @version      3
 // @match        https://manarion.com/*
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -52,7 +52,10 @@
         if (input === null) return;
         const parsed = parseInt(input, 10);
         if (isNaN(parsed) || parsed < 1) {
-            alert('Invalid interval. Please enter a positive integer.');
+            GM_notification({
+                text: `Invalid interval (${input}). Pleae enter a positive integer.`,
+                title: NOTIFICATION_TITLE,
+            });
             return;
         }
         GM_setValue('intervalSeconds', parsed);
